@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo_manabie/pages/home_page/home_page.dart';
 import 'package:todo_manabie/pages/login_page/login_page.dart';
 import 'package:todo_manabie/util/assets_path_util.dart';
@@ -31,11 +32,16 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: Image.asset(
-            '${AssetPathUtil.bgAppBar}',
-            fit: BoxFit.fill,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: Center(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Image.asset(
+              '${AssetPathUtil.bgAppBar}',
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       ),

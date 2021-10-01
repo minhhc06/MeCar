@@ -9,4 +9,11 @@ class WordsUtil {
   static String keySaveListCompleted = 'keySaveListCompleted';
   static const String submit = 'Submit';
   static String doNotHaveTask = 'you don\'t have any task';
+
+  static String login = 'Login';
+  static String username = 'Username';
+  static String password = 'Password';
+  static String validateInputUsername = 'Vui lòng nhập username';
+  static String validateInputPassword = 'Vui lòng nhập password';
+
 }

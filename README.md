@@ -1,6 +1,6 @@
-# todo_manabie
+# Me Car
 
-A new Flutter application for manabie.
+A new Flutter application for Me Car.
 
 ## Getting Started
 

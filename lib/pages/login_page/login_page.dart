@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_manabie/pages/login_input_page/login_input_page.dart';
 
 import '../../util/assets_path_util.dart';
 import '../../util/base_components.dart';
@@ -22,6 +23,8 @@ class _LoginPageState extends State<LoginPage> with BaseComponents {
         children: [
           Center(
             child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: Image.asset(
                 '${AssetPathUtil.bgAppBar}',
                 fit: BoxFit.fill,
@@ -43,7 +46,10 @@ class _LoginPageState extends State<LoginPage> with BaseComponents {
                             titleColor: ColorsUtil.blackColorBtn,
                             radiusColor: ColorsUtil.blackColorBtn,
                         handleOnPress: (){
-                              print('vo day');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginInputPage()),
+                          );
                         })),
                     SizedBox(
                       width: SizeUtil.padding8,
