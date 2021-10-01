@@ -13,7 +13,20 @@ class WordsUtil {
   static String login = 'Login';
   static String username = 'Username';
   static String password = 'Password';
-  static String validateInputUsername = 'Vui lòng nhập username';
-  static String validateInputPassword = 'Vui lòng nhập password';
+  static String passwordAgain = 'Confirm password';
+
+  static String validateInputUsername = 'Please Re-Enter username';
+  static String validateInputPassword = 'Please Re-Enter password';
+  static String validateInputConfirmPassword = 'Please Re-Enter confirm password';
+  static String validateInputPasswordAgain = 'Please enter password again';
+  static String validateInputLeast8Characters = 'Password must be at least 8 characters long';
+  static String validateInputSame = 'Password must be same as above';
+
+  static String register = 'Register';
+  static String discover = 'Discover';
+
+  static String warning = 'Warning';
+  static String close = 'Close';
+  static String comparePassword = 'Passwords do not match';
 
 }

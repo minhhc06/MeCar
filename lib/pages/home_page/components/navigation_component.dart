@@ -1,46 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:todo_manabie/util/colors_util.dart';
-import 'package:todo_manabie/util/convert_color_util.dart';
-import 'package:todo_manabie/util/enum_util.dart';
-import 'package:todo_manabie/util/words_util.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mecar/util/assets_path_util.dart';
+import 'package:mecar/util/base_components.dart';
+import 'package:mecar/util/colors_util.dart';
+import 'package:mecar/util/convert_color_util.dart';
+import 'package:mecar/util/enum_util.dart';
+import 'package:mecar/util/size_util.dart';
+import 'package:mecar/util/words_util.dart';
 
 
-class NavigationComponent{
+class NavigationComponent extends BaseComponents{
   Widget bottomNavigationBar(
-      { Function(int) onTapFunction,  Stream<TypeCategory> stream }) {
-    return StreamBuilder<TypeCategory>(
+      { Function(TypeNavigationBar) onTapFunction,  Stream<TypeNavigationBar> stream }) {
+    return StreamBuilder<TypeNavigationBar>(
         stream: stream,
         builder: (context, snapshot) {
           if (snapshot.data != null) {
-            return BottomNavigationBar(
-              backgroundColor: ConvertColorUtil(ColorsUtil.blueColorApp),
-              type: BottomNavigationBarType.fixed,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.wallet_travel_sharp,
+            return Padding(
+              padding: const EdgeInsets.only(bottom: SizeUtil.padding16),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                      child: GestureDetector(
+                        onTap: ()=> onTapFunction(TypeNavigationBar.home),
+                        child: SvgPicture.asset('${AssetPathUtil.homeIcon}', color: snapshot.data == TypeNavigationBar.home ? TypeNavigationBar.home.color : Colors.grey,
+                          width: 22, height: 22,),
+                      )),
+                  Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                          onTap: ()=> onTapFunction(TypeNavigationBar.search),
+                          child: SvgPicture.asset('${AssetPathUtil.searchIcon}', color: snapshot.data == TypeNavigationBar.search ? TypeNavigationBar.search.color : Colors.grey,width: 22, height: 22,))),
+                  SizedBox(width: 32,),
+                  Expanded(
+                      flex: 3,
+                      child: Container(
+                        height: 40,
+                        decoration: myBoxDecoration(),
 
-                  ),
-                  label: '${WordsUtil.all}',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.done_all,
-                  ),
-                  label: '${WordsUtil.complete}',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.gps_not_fixed,
-                  ),
-                  label: '${WordsUtil.incomplete}',
-                ),
-
-              ],
-              currentIndex: snapshot.data.index,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.grey,
-              onTap: onTapFunction,
+                        child: Icon(Icons.add, color: Colors.white,),
+                      )),
+                  SizedBox(width: 32,),
+                  Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                          onTap: ()=> onTapFunction(TypeNavigationBar.chat),
+                          child: SvgPicture.asset('${AssetPathUtil.chatIcon}', color: snapshot.data == TypeNavigationBar.chat ? TypeNavigationBar.chat.color : Colors.grey, width: 22, height: 22,))),
+                  Expanded(
+                      flex: 2,
+                      child: GestureDetector(
+                          onTap: ()=> onTapFunction(TypeNavigationBar.user),
+                          child: SvgPicture.asset('${AssetPathUtil.userIcon}', color: snapshot.data == TypeNavigationBar.user ? TypeNavigationBar.home.color : Colors.grey, width: 22, height: 22,))),
+                ],
+              ),
             );
           }
           return Container();

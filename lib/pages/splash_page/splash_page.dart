@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo_manabie/pages/home_page/home_page.dart';
-import 'package:todo_manabie/pages/login_page/login_page.dart';
-import 'package:todo_manabie/util/assets_path_util.dart';
-import 'package:todo_manabie/util/colors_util.dart';
-import 'package:todo_manabie/util/convert_color_util.dart';
+import 'package:mecar/pages/home_page/home_page.dart';
+import 'package:mecar/pages/login_page/login_page.dart';
+import 'package:mecar/util/assets_path_util.dart';
+import 'package:mecar/util/colors_util.dart';
+import 'package:mecar/util/convert_color_util.dart';
 
 class SplashPage extends StatefulWidget {
   @override

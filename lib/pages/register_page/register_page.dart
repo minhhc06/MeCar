@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_manabie/bloc/register_page_bloc.dart';
-import 'package:todo_manabie/util/assets_path_util.dart';
-import 'package:todo_manabie/util/base_components.dart';
-import 'package:todo_manabie/util/colors_util.dart';
-import 'package:todo_manabie/util/size_util.dart';
-import 'package:todo_manabie/util/words_util.dart';
+import 'package:mecar/bloc/register_page_bloc.dart';
+import 'package:mecar/pages/home_page/home_page.dart';
+import 'package:mecar/util/assets_path_util.dart';
+import 'package:mecar/util/base_components.dart';
+import 'package:mecar/util/colors_util.dart';
+import 'package:mecar/util/size_util.dart';
+import 'package:mecar/util/words_util.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
   final _formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final checkPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   RegisterPageBloc bloc;
 
   @override
@@ -56,16 +57,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                       )),
                   Expanded(
                       flex: 2,
-                      child: Center(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${WordsUtil.login}',
-                                style: TextStyle(fontSize: 32),
-                              ),
-                            ],
-                          ))),
+                      child: buildTitlePage(title: WordsUtil.register)),
                   Expanded(
                     flex: 15,
                     child: Form(
@@ -105,10 +97,44 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                                               !isShowPassword.data);
                                         }),
                                     validate: (value) {
-                                      if (value != '') {
+                                      if (value.isEmpty) {
+                                        return "${WordsUtil.validateInputPassword}";
+                                      } else if (value.length < 8) {
+                                        return "${WordsUtil.validateInputLeast8Characters}";
+                                      }else {
                                         return null;
+                                      }
+                                    });
+                              }),
+                          StreamBuilder<bool>(
+                              stream: bloc.getIsShowConfirmPassword,
+                              builder: (context, isShowConfirmPassword) {
+                                return textFromFieldUtil(
+                                    controller: confirmPasswordController,
+                                    isObscureText: isShowConfirmPassword.data != null
+                                        ? isShowConfirmPassword.data
+                                        : true,
+                                    textInputAction: TextInputAction.done,
+                                    hintText: '${WordsUtil.validateInputPasswordAgain}',
+                                    labelText: '${WordsUtil.passwordAgain}',
+                                    iconButtonSuffixIcon: IconButton(
+                                        icon: isShowConfirmPassword.data == true
+                                            ? Icon(
+                                            Icons.remove_red_eye_outlined)
+                                            : Icon(Icons.remove_red_eye),
+                                        onPressed: () {
+                                          bloc.setIsShowConfirmPassword(
+                                              !isShowConfirmPassword.data);
+                                        }),
+                                    validate: (value) {
+                                      if (value.isEmpty) {
+                                        return "${WordsUtil.validateInputConfirmPassword}";
+                                      } else if (value.length < 8) {
+                                        return "${WordsUtil.validateInputLeast8Characters}";
+                                      } else if (value != passwordController.text) {
+                                        return "${WordsUtil.validateInputSame}";
                                       } else {
-                                        return '${WordsUtil.validateInputPassword}';
+                                        return null;
                                       }
                                     });
                               }),
@@ -119,9 +145,16 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                             children: [
                               Expanded(
                                   child: buttonUtil(
-                                      title: '${WordsUtil.login}',
+                                      title: '${WordsUtil.register}',
                                       handleOnPress: () {
-                                        if (_formKey.currentState.validate()) {}
+                                        if (_formKey.currentState.validate()) {
+                                          Navigator.pushReplacement<void, void>(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>  HomePage(),
+                                            ),
+                                          );
+                                        }
                                       })),
                             ],
                           )

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_manabie/pages/login_input_page/login_input_page.dart';
+import 'package:mecar/pages/login_input_page/login_input_page.dart';
+import 'package:mecar/pages/register_page/register_page.dart';
+import 'package:mecar/util/words_util.dart';
 
 import '../../util/assets_path_util.dart';
 import '../../util/base_components.dart';
@@ -54,8 +56,11 @@ class _LoginPageState extends State<LoginPage> with BaseComponents {
                     SizedBox(
                       width: SizeUtil.padding8,
                     ),
-                    Expanded(flex: 1, child: buttonUtil(title: 'Register', handleOnPress: (){
-
+                    Expanded(flex: 1, child: buttonUtil(title: '${WordsUtil.register}', handleOnPress: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                      );
                     })),
                   ],
                 )),

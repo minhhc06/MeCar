@@ -6,6 +6,19 @@ import 'size_util.dart';
 import 'words_util.dart';
 
 class BaseComponents {
+  Widget buildTitlePage({String title}){
+    return Center(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$title',
+              style: TextStyle(fontSize: 32),
+            ),
+          ],
+        ));
+  }
+
   Widget buttonUtil(
       {String title = '${WordsUtil.submit}',
       Color background = ColorsUtil.blackColorBtn,
@@ -70,4 +83,93 @@ class BaseComponents {
       ),
     );
   }
+
+  dialogWarning(
+      {@required BuildContext context,
+        @required bool isWarning,
+        String title,
+        String description,
+        String buttonTitle,
+        Function function}) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)), //this right here
+            child: _buildLayoutDialog(
+                title: title,
+                description: description,
+                textButton: buttonTitle,
+                function: function),
+          );
+        });
+  }
+
+
+  Widget _buildLayoutDialog({@required String title, @required String description, String textButton, Function function}){
+    return Container(
+      height: SizeUtil.heightContainerDialog,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(SizeUtil.padding8),
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: Text(title, style: TextStyle(fontSize: SizeUtil.fontSizeTextTitleDialog , fontWeight: FontWeight.bold),)),
+
+              Expanded(
+                  flex: 2,
+                  child: Text(description, style: TextStyle(fontSize: SizeUtil.fontSizeTextDescriptionDialog),)),
+              Container(
+                height: 1,
+                width: double.infinity,
+                color: Colors.grey,
+              ),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: function,
+                  child: Center(
+                    child: Text(textButton, style: TextStyle(fontSize: SizeUtil.fontSizeTextConfirmDialog ,color: Colors.blue),),
+                  ),
+                ),
+              )
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration myBoxDecoration() {
+    return BoxDecoration(
+        gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomLeft,
+        stops: [
+        0.2,
+        0.7,
+
+        ],
+        colors: [
+
+          Colors.pinkAccent,
+          Colors.redAccent,
+
+        ],),
+      // color: Colors.redAccent,
+      border: Border.all(
+          color: Colors.transparent,
+          width: 3.0
+      ),
+      borderRadius: BorderRadius.all(
+          Radius.circular(30.0) //                 <--- border radius here
+      ),
+    );
+  }
+
+
 }

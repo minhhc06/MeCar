@@ -1,26 +1,22 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:todo_manabie/pages/home_page/model/task_model.dart';
-import 'package:todo_manabie/util/enum_util.dart';
+import 'package:mecar/pages/home_page/model/task_model.dart';
+import 'package:mecar/util/enum_util.dart';
 
 class HomePageBloc {
   HomePageBloc({List<TaskModel> listTask}) {
-    setIndexNavigationBar(typeCategory: TypeCategory.all);
+    setIndexNavigationBar(typeCategory: TypeNavigationBar.home);
     setListTaskModel(listTask);
   }
 
-  BehaviorSubject<TypeCategory> _setIndexNavigationBar =
-      BehaviorSubject<TypeCategory>();
+  BehaviorSubject<TypeNavigationBar> _setIndexNavigationBar =
+      BehaviorSubject<TypeNavigationBar>();
 
-  Stream<TypeCategory> get getIndexNavigationBar =>
+  Stream<TypeNavigationBar> get getIndexNavigationBar =>
       _setIndexNavigationBar.stream;
 
-  setIndexNavigationBar({TypeCategory typeCategory}) {
-    try {
+  setIndexNavigationBar({TypeNavigationBar typeCategory}) {
       _setIndexNavigationBar.sink.add(typeCategory);
-      return true;
-    } catch (ex) {
-      return false;
-    }
+
   }
 
   BehaviorSubject<List<TaskModel>> _setListTaskModel =

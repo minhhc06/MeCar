@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_manabie/bloc/login_input_page_bloc.dart';
-import 'package:todo_manabie/util/words_util.dart';
+import 'package:mecar/bloc/login_input_page_bloc.dart';
+import 'package:mecar/pages/home_page/home_page.dart';
+import 'package:mecar/util/words_util.dart';
 
 import '../../util/assets_path_util.dart';
 import '../../util/base_components.dart';
@@ -56,16 +57,7 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                       )),
                   Expanded(
                       flex: 2,
-                      child: Center(
-                          child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${WordsUtil.login}',
-                            style: TextStyle(fontSize: 32),
-                          ),
-                        ],
-                      ))),
+                      child: buildTitlePage(title: WordsUtil.login)),
                   Expanded(
                     flex: 15,
                     child: Form(
@@ -75,7 +67,7 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                           textFromFieldUtil(
                               controller: usernameController,
                               textInputAction: TextInputAction.next,
-                              hintText: '${WordsUtil.username}',
+                              hintText: '${WordsUtil.validateInputPassword}',
                               labelText: '${WordsUtil.username}',
                               validate: (value) {
                                 if (value != '') {
@@ -93,7 +85,7 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                                         ? isShowPassword.data
                                         : true,
                                     textInputAction: TextInputAction.done,
-                                    hintText: '${WordsUtil.password}',
+                                    hintText: '${WordsUtil.validateInputPassword}',
                                     labelText: '${WordsUtil.password}',
                                     iconButtonSuffixIcon: IconButton(
                                         icon: isShowPassword.data == true
@@ -121,7 +113,14 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                                   child: buttonUtil(
                                       title: '${WordsUtil.login}',
                                       handleOnPress: () {
-                                        if (_formKey.currentState.validate()) {}
+                                        if (_formKey.currentState.validate()) {
+                                          Navigator.pushReplacement<void, void>(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>  HomePage(),
+                                            ),
+                                          );
+                                        }
                                       })),
                             ],
                           )
