@@ -8,10 +8,10 @@ import 'package:mecar/util/enum_util.dart';
 import 'package:mecar/util/size_util.dart';
 import 'package:mecar/util/words_util.dart';
 
-
-class NavigationComponent extends BaseComponents{
+class NavigationComponent extends BaseComponents {
   Widget bottomNavigationBar(
-      { Function(TypeNavigationBar) onTapFunction,  Stream<TypeNavigationBar> stream }) {
+      {Function(TypeNavigationBar) onTapFunction,
+      Stream<TypeNavigationBar> stream}) {
     return StreamBuilder<TypeNavigationBar>(
         stream: stream,
         builder: (context, snapshot) {
@@ -21,37 +21,70 @@ class NavigationComponent extends BaseComponents{
               child: Row(
                 children: [
                   Expanded(
-                    flex: 2,
+                      flex: 2,
                       child: GestureDetector(
-                        onTap: ()=> onTapFunction(TypeNavigationBar.home),
-                        child: SvgPicture.asset('${AssetPathUtil.homeIcon}', color: snapshot.data == TypeNavigationBar.home ? TypeNavigationBar.home.color : Colors.grey,
-                          width: 22, height: 22,),
+                        onTap: () => onTapFunction(TypeNavigationBar.home),
+                        child: SvgPicture.asset(
+                          '${AssetPathUtil.homeIcon}',
+                          color: snapshot.data == TypeNavigationBar.home
+                              ? TypeNavigationBar.home.color
+                              : Colors.grey,
+                          width: SizeUtil.sizeIconNavigation,
+                          height: SizeUtil.sizeIconNavigation,
+                        ),
                       )),
                   Expanded(
                       flex: 2,
                       child: GestureDetector(
-                          onTap: ()=> onTapFunction(TypeNavigationBar.search),
-                          child: SvgPicture.asset('${AssetPathUtil.searchIcon}', color: snapshot.data == TypeNavigationBar.search ? TypeNavigationBar.search.color : Colors.grey,width: 22, height: 22,))),
-                  SizedBox(width: 32,),
+                          onTap: () => onTapFunction(TypeNavigationBar.search),
+                          child: SvgPicture.asset(
+                            '${AssetPathUtil.searchIcon}',
+                            color: snapshot.data == TypeNavigationBar.search
+                                ? TypeNavigationBar.search.color
+                                : Colors.grey,
+                            width: SizeUtil.sizeIconNavigation,
+                            height: SizeUtil.sizeIconNavigation,
+                          ))),
+                  SizedBox(
+                    width: SizeUtil.padding32,
+                  ),
                   Expanded(
                       flex: 3,
                       child: Container(
-                        height: 40,
+                        height: SizeUtil.heightContainerAddNavigation,
                         decoration: myBoxDecoration(),
-
-                        child: Icon(Icons.add, color: Colors.white,),
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
                       )),
-                  SizedBox(width: 32,),
+                  SizedBox(
+                    width: SizeUtil.padding32,
+                  ),
                   Expanded(
                       flex: 2,
                       child: GestureDetector(
-                          onTap: ()=> onTapFunction(TypeNavigationBar.chat),
-                          child: SvgPicture.asset('${AssetPathUtil.chatIcon}', color: snapshot.data == TypeNavigationBar.chat ? TypeNavigationBar.chat.color : Colors.grey, width: 22, height: 22,))),
+                          onTap: () => onTapFunction(TypeNavigationBar.chat),
+                          child: SvgPicture.asset(
+                            '${AssetPathUtil.chatIcon}',
+                            color: snapshot.data == TypeNavigationBar.chat
+                                ? TypeNavigationBar.chat.color
+                                : Colors.grey,
+                            width: SizeUtil.sizeIconNavigation,
+                            height: SizeUtil.sizeIconNavigation,
+                          ))),
                   Expanded(
                       flex: 2,
                       child: GestureDetector(
-                          onTap: ()=> onTapFunction(TypeNavigationBar.user),
-                          child: SvgPicture.asset('${AssetPathUtil.userIcon}', color: snapshot.data == TypeNavigationBar.user ? TypeNavigationBar.home.color : Colors.grey, width: 22, height: 22,))),
+                          onTap: () => onTapFunction(TypeNavigationBar.user),
+                          child: SvgPicture.asset(
+                            '${AssetPathUtil.userIcon}',
+                            color: snapshot.data == TypeNavigationBar.user
+                                ? TypeNavigationBar.home.color
+                                : Colors.grey,
+                            width: SizeUtil.sizeIconNavigation,
+                            height: SizeUtil.sizeIconNavigation,
+                          ))),
                 ],
               ),
             );

@@ -29,17 +29,4 @@ extension TypeExtension on TypeNavigationBar {
     }
   }
 
-  // int get index {
-  //   switch (this) {
-  //     case TypeCategory.all:
-  //       return 0;
-  //     case TypeCategory.completed:
-  //       return 1;
-  //     case TypeCategory.inComplete:
-  //       return 2;
-  //     default:
-  //       return null;
-  //   }
-  // }
-
 }

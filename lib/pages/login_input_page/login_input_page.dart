@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mecar/bloc/login_input_page_bloc.dart';
 import 'package:mecar/pages/home_page/home_page.dart';
+import 'package:mecar/util/shared_preference_util.dart';
 import 'package:mecar/util/words_util.dart';
 
 import '../../util/assets_path_util.dart';
@@ -67,7 +68,7 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                           textFromFieldUtil(
                               controller: usernameController,
                               textInputAction: TextInputAction.next,
-                              hintText: '${WordsUtil.validateInputPassword}',
+                              hintText: '${WordsUtil.validateInputUsername}',
                               labelText: '${WordsUtil.username}',
                               validate: (value) {
                                 if (value != '') {
@@ -114,11 +115,11 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
                                       title: '${WordsUtil.login}',
                                       handleOnPress: () {
                                         if (_formKey.currentState.validate()) {
-                                          Navigator.pushReplacement<void, void>(
+                                          SharedPreferenceUtil().setStringSharePreference(key: WordsUtil.token, value: WordsUtil.token);
+
+                                          Navigator.push(
                                             context,
-                                            MaterialPageRoute<void>(
-                                              builder: (BuildContext context) =>  HomePage(),
-                                            ),
+                                            MaterialPageRoute(builder: (context) => HomePage()),
                                           );
                                         }
                                       })),
@@ -141,7 +142,7 @@ class _LoginInputPageState extends State<LoginInputPage> with BaseComponents {
   void dispose() {
     usernameController.dispose();
     passwordController.dispose();
-
+    bloc.disposeBlocBase();
     super.dispose();
   }
 }

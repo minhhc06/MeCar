@@ -16,6 +16,7 @@ class RegisterPageBloc extends BlocBase{
 
   dispose() {
     _setIsShowConfirmPassword.close();
+    disposeBlocBase();
   }
 
   RegisterPageBloc(){

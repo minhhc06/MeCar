@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'colors_util.dart';
 
@@ -169,6 +170,10 @@ class BaseComponents {
           Radius.circular(30.0) //                 <--- border radius here
       ),
     );
+  }
+
+  Future<bool> handleWillPop() async {
+    SystemNavigator.pop();
   }
 
 

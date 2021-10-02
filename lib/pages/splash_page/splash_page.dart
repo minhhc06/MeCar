@@ -5,6 +5,8 @@ import 'package:mecar/pages/login_page/login_page.dart';
 import 'package:mecar/util/assets_path_util.dart';
 import 'package:mecar/util/colors_util.dart';
 import 'package:mecar/util/convert_color_util.dart';
+import 'package:mecar/util/shared_preference_util.dart';
+import 'package:mecar/util/words_util.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -19,10 +21,12 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
       Duration(seconds: 2),
           () async {
+            final token = await SharedPreferenceUtil()
+                .getStringSharePreference(key: WordsUtil.token);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginPage(),
+            builder: (context) => token != null ? HomePage() : LoginPage(),
           ),
         );
       },

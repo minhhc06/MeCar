@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                           textFromFieldUtil(
                               controller: usernameController,
                               textInputAction: TextInputAction.next,
-                              hintText: '${WordsUtil.username}',
+                              hintText: '${WordsUtil.validateInputUsername}',
                               labelText: '${WordsUtil.username}',
                               validate: (value) {
                                 if (value != '') {
@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                                         ? isShowPassword.data
                                         : true,
                                     textInputAction: TextInputAction.done,
-                                    hintText: '${WordsUtil.password}',
+                                    hintText: '${WordsUtil.validateInputPassword}',
                                     labelText: '${WordsUtil.password}',
                                     iconButtonSuffixIcon: IconButton(
                                         icon: isShowPassword.data == true
@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                                         ? isShowConfirmPassword.data
                                         : true,
                                     textInputAction: TextInputAction.done,
-                                    hintText: '${WordsUtil.validateInputPasswordAgain}',
+                                    hintText: '${WordsUtil.validateInputConfirmPassword}',
                                     labelText: '${WordsUtil.passwordAgain}',
                                     iconButtonSuffixIcon: IconButton(
                                         icon: isShowConfirmPassword.data == true
@@ -129,9 +129,7 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                                     validate: (value) {
                                       if (value.isEmpty) {
                                         return "${WordsUtil.validateInputConfirmPassword}";
-                                      } else if (value.length < 8) {
-                                        return "${WordsUtil.validateInputLeast8Characters}";
-                                      } else if (value != passwordController.text) {
+                                      }  else if (value != passwordController.text) {
                                         return "${WordsUtil.validateInputSame}";
                                       } else {
                                         return null;
@@ -148,11 +146,9 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
                                       title: '${WordsUtil.register}',
                                       handleOnPress: () {
                                         if (_formKey.currentState.validate()) {
-                                          Navigator.pushReplacement<void, void>(
+                                          Navigator.push(
                                             context,
-                                            MaterialPageRoute<void>(
-                                              builder: (BuildContext context) =>  HomePage(),
-                                            ),
+                                            MaterialPageRoute(builder: (context) => HomePage()),
                                           );
                                         }
                                       })),
@@ -169,5 +165,15 @@ class _RegisterPageState extends State<RegisterPage>  with BaseComponents{
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    usernameController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    bloc.dispose();
+    super.dispose();
+
   }
 }

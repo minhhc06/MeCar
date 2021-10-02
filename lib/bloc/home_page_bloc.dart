@@ -1,11 +1,28 @@
+import 'package:mecar/util/assets_path_util.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:mecar/pages/home_page/model/task_model.dart';
 import 'package:mecar/util/enum_util.dart';
 
 class HomePageBloc {
-  HomePageBloc({List<TaskModel> listTask}) {
+
+
+  HomePageBloc() {
     setIndexNavigationBar(typeCategory: TypeNavigationBar.home);
-    setListTaskModel(listTask);
+
+    final List<String> images = [
+      "${AssetPathUtil.imageItem1}",
+      "${AssetPathUtil.imageItem2}",
+      "${AssetPathUtil.imageItem3}",
+      "${AssetPathUtil.imageItem4}",
+      "${AssetPathUtil.imageItem5}",
+      "${AssetPathUtil.imageItem6}",
+      "${AssetPathUtil.imageItem7}",
+      "${AssetPathUtil.imageItem8}",
+      "${AssetPathUtil.imageItem9}",
+
+    ];
+
+
+    setListUrlImage(images);
   }
 
   BehaviorSubject<TypeNavigationBar> _setIndexNavigationBar =
@@ -19,42 +36,39 @@ class HomePageBloc {
 
   }
 
-  BehaviorSubject<List<TaskModel>> _setListTaskModel =
-      BehaviorSubject<List<TaskModel>>();
+  BehaviorSubject<List<String>> _setListUrlImage = BehaviorSubject<List<String>>();
 
-  Stream<List<TaskModel>> get getListTaskModel => _setListTaskModel.stream;
+  Stream<List<String>> get getListUrlImage => _setListUrlImage.stream;
 
-  setListTaskModel(List<TaskModel> listTask) {
-    try {
-      _setListTaskModel.sink.add(listTask);
-      return true;
-    } catch (ex) {
-      return false;
-    }
+  setListUrlImage(List<String> listTask) {
+
+    _setListUrlImage.sink.add(listTask);
+
   }
 
-  updateIsCompleted({TaskModel taskModel}) {
-    try {
-      var model = _setListTaskModel.stream.value;
+  updateIsCompleted() {
+    List<String> imagesAddMore = [
+      "${AssetPathUtil.imageItem1}",
+      "${AssetPathUtil.imageItem2}",
+      "${AssetPathUtil.imageItem3}",
+      "${AssetPathUtil.imageItem4}",
+      "${AssetPathUtil.imageItem5}",
+      "${AssetPathUtil.imageItem6}",
+      "${AssetPathUtil.imageItem7}",
+      "${AssetPathUtil.imageItem8}",
+      "${AssetPathUtil.imageItem9}",
 
-      int index = model.indexOf(taskModel);
-      model[index].isComplete = !model[index].isComplete;
+    ];
+      var model = _setListUrlImage.stream.value;
+      model.addAll(imagesAddMore);
 
-      _setListTaskModel.sink.add(model);
+      _setListUrlImage.sink.add(model);
 
-      return true;
-    } catch (ex) {
-      return false;
-    }
   }
 
   dispose() {
-    try {
+
       _setIndexNavigationBar.close();
-      _setListTaskModel.close();
-      return true;
-    } catch (ex) {
-      return false;
-    }
+      _setListUrlImage.close();
   }
 }

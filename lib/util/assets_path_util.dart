@@ -10,6 +10,8 @@ class AssetPathUtil{
   static String imageItem8 = 'assets/images/image_item_8.png';
   static String imageItem9 = 'assets/images/image_item_9.png';
   static String imageItem10 = 'assets/images/image_item_10.png';
+  static String imageTitleHome = 'assets/images/image_title_home.png';
+  static String imageAvatar = 'assets/images/image_ronaldo.jpeg';
   static String iconBack = 'assets/icons/btn_back.svg';
   static String homeIcon = 'assets/icons/home_icon.svg';
   static String searchIcon = 'assets/icons/search_icon.svg';
